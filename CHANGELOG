@@ -1,0 +1,26 @@
+BUILD: 0.1 alpha
+NOTES: Initial setup, basic IO
+
+BUILD: 1.0 alpha
+NOTES: Initial release, ncurses
+
+    BUILD: 1.0.1 alpha
+    FIXED: Made sure str(battle) is displayed before user
+             makes choice to auto play or not
+
+    BUILD: 1.0.2 alpha
+    FIXED: Made input more clear as to when you can quit
+             the program and when you can break a battle
+
+    BUILD: 1.0.3 alpha
+    FIXED: Moved result line below Battle string
+
+    BUILD: 1.0.4 alpha
+    FIXED: Minimumize writes to screen (optimization)
+
+BUILD: 2.0 alpha
+FIXED: First release of Three Offense Vs Two Defense
+         dice system
+NOTES: Need to check rules to avoid Offense troops
+         falling to zero
+       Need to replace assert statements
