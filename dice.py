@@ -23,25 +23,22 @@ this can be changed by giving the first argument as a single character.
 
 DICE_DOTS = chr(183)
 
-def join(*faces, sep=""):
-    faces = list(faces)
-    for face in range(len(faces)):
-        faces[face] = faces[face].split("\n")
+def join(*faces):
+    faces = [face.split("\n") for face in faces)]
+
     lines = ['' for _ in faces[0]]
     for face in faces:
         for line in range(len(face)):
-            lines[line] += "{}{}".format(face[line], sep)
+            lines[line] += face[line]
+
     return "\n".join(lines)
 
 def str(number):
     """Returns the multi-line str relivant to number"""
-    line = " | {0:^5} |"
-    top = bottom = "  ------- "
+    line = " | {0:^5} | "
+    top = bottom = "  -------  "
 
-    s = [top]
-    for x in side(number):
-        s.append(line.format(x))
-    s.append(bottom)
+    s = [top] + [line.format(x) for x in side(number)] + [bottom]
 
     return ("\n".join(s)).replace("x", DICE_DOTS)
 

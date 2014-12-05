@@ -185,7 +185,7 @@ def main(stdscr):
     curses.curs_set(0)
 
     stdscr.addstr(0, 20, "Welcome to the Risk Battler!")
-    stdscr.addstr(4,  0, "  Offense   Defense")
+    stdscr.addstr(4,  0, "  Offense    Defense")
     stdscr.addstr(6,  0, dice.join(dice.str(1), dice.str(1)))
     stdscr.addstr(12, 0, dice.join(dice.str(1), dice.str(1)))
     stdscr.addstr(18, 0, dice.str(1))
