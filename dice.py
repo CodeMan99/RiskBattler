@@ -24,7 +24,7 @@ this can be changed by giving the first argument as a single character.
 DICE_DOTS = chr(183)
 
 def join(*faces):
-    faces = [face.split("\n") for face in faces)]
+    faces = [face.split("\n") for face in faces]
 
     lines = ['' for _ in faces[0]]
     for face in faces:
