@@ -53,4 +53,4 @@ def side(number):
     return [one, two, three, four, five, six][(number - 1)]
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise RuntimeError("dice.py is a module")

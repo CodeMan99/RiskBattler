@@ -28,7 +28,6 @@ __version__ = "2.0 Alpha"
 
 import curses
 import dice
-import sys
 from random import randint
 
 class Army:
