@@ -41,6 +41,7 @@ class Army:
 
         Sets roll to Zero to indicate no attack has occured
         """
+        self.__start = troops
         self.__troops = troops
         self.__roll = []
 
@@ -48,7 +49,7 @@ class Army:
         return "{0!r} troops".format(self.__troops)
 
     def __str__(self):
-        return "{} troops".format(self.__troops)
+        return "{} troops; {} lost".format(self.__troops, self.lost())
 
     def __eq__(self, other):
         """Compares number of troops"""
@@ -100,6 +101,10 @@ class Army:
         self.__roll.reverse()
 
         return self.__roll
+
+    def lost(self):
+        """The number of troops lost since start of battle"""
+        return self.__start - self.__troops
 
     def can_attack(self):
         """True when this army can still attack"""
