@@ -21,5 +21,4 @@ Using this program
 Known Issues
 ------------
  - In rare cases the offensive side may fall to zero, in this case just assume it's actually one.
- - You may only quit the program at the start of a battle with 'q'. This is a flaw in the way `get_int` function works.
  - The program requires 28 console lines to run properly.

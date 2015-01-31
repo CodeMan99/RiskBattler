@@ -24,7 +24,7 @@ you can stop the battle before you lose your advantage
 
 __all__ = ['main', 'get_int', 'Army', 'Battle']
 __author__ = "Cody A. Taylor ( codemister99@yahoo.com )"
-__version__ = "2.0 Alpha"
+__version__ = "2.1.1 Alpha"
 
 import curses
 import dice
@@ -159,6 +159,13 @@ class Battle:
 
         return o_roll, d_roll, result
 
+def get_input(method):
+    """Checks the result of 'method' to see if we should exit"""
+    ret = method()
+    if ret in (b'q', b'Q', ord('q'), ord('Q')):
+        raise SystemExit
+    return ret
+
 def get_int(scr, x, msg):
     """Basic ncurses get_int
 
@@ -173,7 +180,7 @@ def get_int(scr, x, msg):
 
     i = ""
     while type(i) != int:
-        i = scr.getstr()
+        i = get_input(scr.getstr)
         try:
             i = int(i)
         except ValueError:
@@ -194,8 +201,7 @@ def main(stdscr):
     stdscr.addstr(12, 0, dice.join(dice.str(1), dice.str(1)))
     stdscr.addstr(18, 0, dice.str(1))
 
-    ch = ord('1')
-    while ch != ord('q'):
+    while True:
         offense = get_int(stdscr, 2, "Number of offensive troops")
         defense = get_int(stdscr, 2, "Number of defensive troops")
 
@@ -205,7 +211,7 @@ def main(stdscr):
         stdscr.addstr(24, 0, str(battle))
 
         stdscr.refresh()
-        ch = stdscr.getch()
+        ch = get_input(stdscr.getch)
 
         auto = True if ch == ord(' ') else False
 
@@ -214,11 +220,11 @@ def main(stdscr):
         else:
             stdscr.addstr(2, 0, "                                                                               ")
 
-        while battle.action() and ch != ord('q'):
+        while battle.action():
             stdscr.refresh()
 
             if auto == False:
-                ch = stdscr.getch()
+                ch = get_input(stdscr.getch)
                 if ch != ord(' '):
                     break
             else:

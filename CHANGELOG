@@ -24,3 +24,6 @@ FIXED: First release of Three Offense Vs Two Defense
 NOTES: Need to check rules to avoid Offense troops
          falling to zero
        Need to replace assert statements
+
+    BUILD: 2.1.1 alpha
+    FIXED: Make sure all user input is checked for exit
