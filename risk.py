@@ -121,10 +121,10 @@ class Battle:
         self.__defense = defense
 
     def __repr__(self):
-        return "Offense: {0!r}    \nDefense: {1!r}    ".format(self.__offense, self.__defense)
+        return "Offense: {0!r}\nDefense: {1!r}".format(self.__offense, self.__defense)
 
     def __str__(self):
-        return "Offense: {0}    \nDefense: {1}    ".format(self.__offense, self.__defense)
+        return "Offense: {0}\nDefense: {1}".format(self.__offense, self.__defense)
 
     def action(self):
         """True if the Offense can still attack and the defense can still defend"""
@@ -144,18 +144,18 @@ class Battle:
 
         if o_roll[0] > d_roll[0]:
             self.__defense.lose()
-            result += "Won "
+            result += "Won"
         else:
             self.__offense.lose()
-            result += "Lost "
+            result += "Lost"
 
         if len(o_roll) > 1 and len(d_roll) > 1:
             if o_roll[1] > d_roll[1]:
                 self.__defense.lose()
-                result += "and Won"
+                result += " and Won"
             else:
                 self.__offense.lose()
-                result += "and Lost"
+                result += " and Lost"
 
         return o_roll, d_roll, result
 
@@ -187,7 +187,7 @@ def get_int(scr, x, msg):
             scr.addstr(x, len(msg) + 2, " " * len(i))
             scr.move(x, len(msg) + 2)
 
-    scr.addstr(x, 0, " " * ( len(msg) + 2 + len(str(i)) ) )
+    scr.addstr(x, 0, " " * (len(msg) + 2 + len(str(i))))
     curses.noecho()
     curses.curs_set(0)
     return i
@@ -218,7 +218,7 @@ def main(stdscr):
         if auto == False:
             stdscr.addstr(2, 0, "Hit ' ' to continue battle, 'q' to quit, any other to stop                     ")
         else:
-            stdscr.addstr(2, 0, "                                                                               ")
+            stdscr.addstr(2, 0, " " * 80)
 
         while battle.action():
             stdscr.refresh()
@@ -247,11 +247,13 @@ def main(stdscr):
             else:
                 stdscr.addstr(18, 0, "{:30}\n".format(" ") * 5)
 
+            stdscr.addstr(24, 0, " " * 30)
+            stdscr.addstr(25, 0, " " * 30)
             stdscr.addstr(24, 0, str(battle))
-            stdscr.addstr(27, 0, "Offense roll {}          ".format(result))
+            stdscr.addstr(27, 0, "Offense roll {:<13}".format(result))
 
         if auto == False:
-            stdscr.addstr(2, 0, "                                                          ")
+            stdscr.addstr(2, 0, " " * 80)
 
         stdscr.refresh() # must refresh one last time to show final result
 
