@@ -139,8 +139,8 @@ class Battle:
         d_roll = self.__defense.roll(2)
         result = ""
 
-        assert "No die for offense", len(o_roll) == 0
-        assert "No die for defense", len(d_roll) == 0
+        assert len(o_roll) > 0, "No die for offense"
+        assert len(d_roll) > 0, "No die for defense"
 
         if o_roll[0] > d_roll[0]:
             self.__defense.lose()
