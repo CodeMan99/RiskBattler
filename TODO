@@ -1,1 +1,2 @@
 2.0: Replace assert statements with good Error handling
+2.1.1: Add options to use less than 20 rows.
