@@ -84,15 +84,19 @@ class Army:
         self.__troops -= troops
         return self
 
-    def roll(self, number=1):
+    def roll(self, number=1, reserve=0):
         """Set the roll to a new random number [1, 6]
+
+        number: The count of dice to roll
+        reserve: The the of troops to exclude
 
         Returns a list of sorted random numbers
         """
         self.__roll = []
 
-        if number > self.__troops:
-            number = self.__troops
+        # This sets the correct number for dwindled armies.
+        if number >= self.__troops:
+            number = self.__troops - reserve
 
         for roll in range(number):
             self.__roll.append(randint(1, 6))
@@ -135,7 +139,7 @@ class Battle:
 
         Returns (offense_roll, defense_roll, str_result)
         """
-        o_roll = self.__offense.roll(3)
+        o_roll = self.__offense.roll(3, 1)
         d_roll = self.__defense.roll(2)
         result = ""
 
