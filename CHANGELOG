@@ -27,3 +27,7 @@ NOTES: Need to check rules to avoid Offense troops
 
     BUILD: 2.1.1 alpha
     FIXED: Make sure all user input is checked for exit
+
+    BUILD: 2.1.2 alpha
+    FIXED: Use the correct number of dice for 3, 2, and 1
+             attacking Armies.

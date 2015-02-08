@@ -24,7 +24,7 @@ you can stop the battle before you lose your advantage
 
 __all__ = ['main', 'get_int', 'Army', 'Battle']
 __author__ = "Cody A. Taylor ( codemister99@yahoo.com )"
-__version__ = "2.1.1 Alpha"
+__version__ = "2.1.2 Alpha"
 
 import curses
 import dice
