@@ -16,7 +16,7 @@ NOTES: Initial release, ncurses
     FIXED: Moved result line below Battle string
 
     BUILD: 1.0.4 alpha
-    FIXED: Minimumize writes to screen (optimization)
+    FIXED: Minimize writes to screen (optimization)
 
 BUILD: 2.0 alpha
 FIXED: First release of Three Offense Vs Two Defense
@@ -30,4 +30,7 @@ NOTES: Need to check rules to avoid Offense troops
 
     BUILD: 2.1.2 alpha
     FIXED: Use the correct number of dice for 3, 2, and 1
-             attacking Armies.
+             attacking Armies
+
+    BUILD: 2.1.3 alpha
+    FIXED: Finally removed assert statements from risk.py

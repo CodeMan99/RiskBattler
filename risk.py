@@ -24,7 +24,7 @@ you can stop the battle before you lose your advantage
 
 __all__ = ['main', 'get_int', 'Army', 'Battle']
 __author__ = "Cody A. Taylor ( codemister99@yahoo.com )"
-__version__ = "2.1.2 Alpha"
+__version__ = "2.1.3 Alpha"
 
 import curses
 import dice
@@ -98,6 +98,11 @@ class Army:
         if number >= self.__troops:
             number = self.__troops - reserve
 
+        if number < 1:
+            raise ValueError("The number of dice to roll is less than 1. " \
+                "You did some voodoo! Seriously though, this should never " \
+                "happen and you should report a bug.")
+
         for roll in range(number):
             self.__roll.append(randint(1, 6))
 
@@ -142,9 +147,6 @@ class Battle:
         o_roll = self.__offense.roll(3, 1)
         d_roll = self.__defense.roll(2)
         result = ""
-
-        assert len(o_roll) > 0, "No die for offense"
-        assert len(d_roll) > 0, "No die for defense"
 
         if o_roll[0] > d_roll[0]:
             self.__defense.lose()
