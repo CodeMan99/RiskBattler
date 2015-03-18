@@ -20,4 +20,4 @@ Using this program
 
 Known Issues
 ------------
- - The program requires 28 console lines to run properly.
+ - The program requires 21 console lines to run properly.

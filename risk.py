@@ -46,7 +46,7 @@ class Army:
         self.__roll = []
 
     def __repr__(self):
-        return "{0!r} troops".format(self.__troops)
+        return "Army(troops={!r})".format(self.__troops)
 
     def __str__(self):
         return "{} troops; {} lost".format(self.__troops, self.lost())
@@ -130,7 +130,7 @@ class Battle:
         self.__defense = defense
 
     def __repr__(self):
-        return "Offense: {0!r}\nDefense: {1!r}".format(self.__offense, self.__defense)
+        return "Battle(offense={!r}, defense={!r})".format(self.__offense, self.__defense)
 
     def __str__(self):
         return "Offense: {0}\nDefense: {1}".format(self.__offense, self.__defense)
@@ -164,6 +164,14 @@ class Battle:
                 result += " and Lost"
 
         return o_roll, d_roll, result
+
+    @property
+    def offense(self):
+        return self.__offense
+
+    @property
+    def defense(self):
+        return self.__defense
 
 def get_input(method):
     """Checks the result of 'method' to see if we should exit"""
@@ -202,10 +210,6 @@ def main(stdscr):
     curses.curs_set(0)
 
     stdscr.addstr(0, 20, "Welcome to the Risk Battler!")
-    stdscr.addstr(4,  0, "  Offense    Defense")
-    stdscr.addstr(6,  0, dice.join(dice.str(1), dice.str(1)))
-    stdscr.addstr(12, 0, dice.join(dice.str(1), dice.str(1)))
-    stdscr.addstr(18, 0, dice.str(1))
 
     while True:
         offense = get_int(stdscr, 2, "Number of offensive troops")
@@ -214,7 +218,6 @@ def main(stdscr):
         stdscr.addstr(2, 0, "Hit ' ' to automatically finish battles, 'q' to quit, any other for manual play")
 
         battle = Battle(Army(offense), Army(defense))
-        stdscr.addstr(24, 0, str(battle))
 
         stdscr.refresh()
         ch = get_input(stdscr.getch)
@@ -237,26 +240,18 @@ def main(stdscr):
                 curses.napms(600)
 
             o_roll, d_roll, result = battle.attack()
+            o_roll = [dice.str(d) for d in o_roll]
+            d_roll = [dice.str(d) for d in d_roll]
 
-            stdscr.addstr(6, 0, dice.join(dice.str(o_roll[0]), dice.str(d_roll[0])))
+            stdscr.addstr(4, 2, "Offense: {:>17}".format(str(battle.offense)))
+            stdscr.addstr(6, 0, "\n".join([" " * 18] * 6))
+            stdscr.addstr(6, 0, dice.join(*o_roll))
 
-            if len(o_roll) > 1 and len(d_roll) > 1:
-                stdscr.addstr(12, 0, dice.join(dice.str(o_roll[1]), dice.str(d_roll[1])))
-            elif len(o_roll) > 1:
-                stdscr.addstr(12, 0, "{:30}\n".format(" ") * 5)
-                stdscr.addstr(12, 0, dice.str(o_roll[1]))
-            else:
-                stdscr.addstr(12, 0, "{:30}\n".format(" ") * 5)
+            stdscr.addstr(12, 2, "Defense: {:>17}".format(str(battle.defense)))
+            stdscr.addstr(14, 0, "\n".join([" " * 18] * 6))
+            stdscr.addstr(14, 0, dice.join(*d_roll))
 
-            if len(o_roll) > 2:
-                stdscr.addstr(18, 0, dice.str(o_roll[2]))
-            else:
-                stdscr.addstr(18, 0, "{:30}\n".format(" ") * 5)
-
-            stdscr.addstr(24, 0, " " * 30)
-            stdscr.addstr(25, 0, " " * 30)
-            stdscr.addstr(24, 0, str(battle))
-            stdscr.addstr(27, 0, "Offense roll {:<13}".format(result))
+            stdscr.addstr(20, 0, "Offense roll {:<13}".format(result))
 
         if auto == False:
             stdscr.addstr(2, 0, " " * 80)

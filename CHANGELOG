@@ -34,3 +34,11 @@ NOTES: Need to check rules to avoid Offense troops
 
     BUILD: 2.1.3 alpha
     FIXED: Finally removed assert statements from risk.py
+
+BUILD: 3.0 Beta
+FIXED: Changed to a horazontal layout. Highest die on the
+         left
+       Corrected an error where a valid defense die was
+         not displayed because it was tied to the offensive
+         die count
+       Lowered the required line count to twenty one lines
