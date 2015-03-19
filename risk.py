@@ -224,10 +224,9 @@ def main(stdscr):
 
         auto = True if ch == ord(' ') else False
 
+        stdscr.addstr(2, 0, " " * 80)
         if auto == False:
-            stdscr.addstr(2, 0, "Hit ' ' to continue battle, 'q' to quit, any other to stop                     ")
-        else:
-            stdscr.addstr(2, 0, " " * 80)
+            stdscr.addstr(2, 0, "Hit ' ' to continue battle, 'q' to quit, any other to stop")
 
         while battle.action():
             stdscr.refresh()
@@ -244,11 +243,11 @@ def main(stdscr):
             d_roll = [dice.str(d) for d in d_roll]
 
             stdscr.addstr(4, 2, "Offense: {:>17}".format(str(battle.offense)))
-            stdscr.addstr(6, 0, "\n".join([" " * 18] * 6))
+            stdscr.addstr(6, 0, "\n".join([" " * 33] * 5))
             stdscr.addstr(6, 0, dice.join(*o_roll))
 
             stdscr.addstr(12, 2, "Defense: {:>17}".format(str(battle.defense)))
-            stdscr.addstr(14, 0, "\n".join([" " * 18] * 6))
+            stdscr.addstr(14, 0, "\n".join([" " * 22] * 5))
             stdscr.addstr(14, 0, dice.join(*d_roll))
 
             stdscr.addstr(20, 0, "Offense roll {:<13}".format(result))
