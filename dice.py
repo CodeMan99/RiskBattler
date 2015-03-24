@@ -21,8 +21,6 @@ The default is to print dice with `chr(183)` as the dots,
 this can be changed by giving the first argument as a single character.
 """
 
-DICE_DOTS = chr(183)
-
 def join(*faces):
     faces = [face.split("\n") for face in faces]
 
@@ -33,14 +31,14 @@ def join(*faces):
 
     return "\n".join(lines)
 
-def str(number):
+def str(number, dice_dots=chr(183)):
     """Returns the multi-line str relivant to number"""
     line = " | {0:^5} | "
     top = bottom = "  -------  "
 
     s = [top] + [line.format(x) for x in side(number)] + [bottom]
 
-    return ("\n".join(s)).replace("x", DICE_DOTS)
+    return ("\n".join(s)).replace("x", dice_dots)
 
 def side(number):
     """Returns the dots (x) relivant to number"""
