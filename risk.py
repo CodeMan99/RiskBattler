@@ -36,44 +36,20 @@ class Army:
     Keeps track of the number of troops you have
     As well as the roll for each individual attack
     """
-    def __init__(self, troops):
+    def __init__(self, troops, reserve=0):
         """Initializes the army with the given number of troops
 
         Sets roll to Zero to indicate no attack has occured
         """
         self.__start = troops
         self.__troops = troops
-        self.__roll = []
+        self.__reserve = reserve
 
     def __repr__(self):
-        return "Army(troops={!r})".format(self.__troops)
+        return "Army(troops={!r}, reserve={!r})".format(self.__troops, self.__reserve)
 
     def __str__(self):
         return "{} troops; {} lost".format(self.__troops, self.lost())
-
-    def __eq__(self, other):
-        """Compares number of troops"""
-        return self.__troops == other.__troops
-
-    def __ne__(self, other):
-        """Compares number of troops"""
-        return self.__troops != other.__troops
-
-    def __lt__(self, other):
-        """Compares last roll"""
-        return self.__roll < other.__roll
-
-    def __le__(self, other):
-        """Compares last roll"""
-        return self.__roll <= other.__roll
-
-    def __gt__(self, other):
-        """Compares last roll"""
-        return self.__roll > other.__roll
-
-    def __ge__(self, other):
-        """Compares last roll"""
-        return self.__roll >= other.__roll
 
     def lose(self, troops=1):
         """Lose the given number of troops
@@ -84,7 +60,7 @@ class Army:
         self.__troops -= troops
         return self
 
-    def roll(self, count=1, reserve=0):
+    def roll(self, count=1):
         """Set the roll to a new random number [1, 6]
 
         count: The count of dice to roll
@@ -96,19 +72,14 @@ class Army:
 
         # This sets the correct count for dwindled armies.
         if count >= self.__troops:
-            count = self.__troops - reserve
+            count = self.__troops - self.__reserve
 
         if count < 1:
             raise ValueError("The count of dice to roll is less than 1. " \
                 "You did some voodoo! Seriously though, this should never " \
                 "happen and you should report a bug.")
 
-        for roll in range(count):
-            self.__roll.append(randint(1, 6))
-
-        self.__roll.sort(reverse=True)
-
-        return self.__roll
+        return sorted([randint(1, 6) for roll in range(count)], reverse=True)
 
     def lost(self):
         """The number of troops lost since start of battle"""
@@ -143,7 +114,7 @@ class Battle:
 
         Returns (offense_roll, defense_roll, str_result)
         """
-        o_roll = self.__offense.roll(3, 1)
+        o_roll = self.__offense.roll(3)
         d_roll = self.__defense.roll(2)
         result = ""
 
@@ -216,7 +187,7 @@ def main(stdscr):
 
         stdscr.addstr(2, 0, "Hit ' ' to automatically finish battles, 'q' to quit, any other for manual play")
 
-        battle = Battle(Army(offense), Army(defense))
+        battle = Battle(Army(offense, 1), Army(defense))
 
         stdscr.refresh()
         ch = get_input(stdscr.getch)
