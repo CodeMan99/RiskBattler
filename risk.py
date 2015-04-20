@@ -242,11 +242,11 @@ def main(stdscr):
             o_roll = [dice.str(d) for d in o_roll]
             d_roll = [dice.str(d) for d in d_roll]
 
-            stdscr.addstr(4, 2, "Offense: {:>17}".format(str(battle.offense)))
+            stdscr.addstr(4, 2, "Offense: {:>20}".format(str(battle.offense)))
             stdscr.addstr(6, 0, "\n".join([" " * 33] * 5))
             stdscr.addstr(6, 0, dice.join(*o_roll))
 
-            stdscr.addstr(12, 2, "Defense: {:>17}".format(str(battle.defense)))
+            stdscr.addstr(12, 2, "Defense: {:>20}".format(str(battle.defense)))
             stdscr.addstr(14, 0, "\n".join([" " * 22] * 5))
             stdscr.addstr(14, 0, dice.join(*d_roll))
 
