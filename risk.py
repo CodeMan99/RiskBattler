@@ -84,30 +84,29 @@ class Army:
         self.__troops -= troops
         return self
 
-    def roll(self, number=1, reserve=0):
+    def roll(self, count=1, reserve=0):
         """Set the roll to a new random number [1, 6]
 
-        number: The count of dice to roll
+        count: The count of dice to roll
         reserve: The the of troops to exclude
 
         Returns a list of sorted random numbers
         """
         self.__roll = []
 
-        # This sets the correct number for dwindled armies.
-        if number >= self.__troops:
-            number = self.__troops - reserve
+        # This sets the correct count for dwindled armies.
+        if count >= self.__troops:
+            count = self.__troops - reserve
 
-        if number < 1:
-            raise ValueError("The number of dice to roll is less than 1. " \
+        if count < 1:
+            raise ValueError("The count of dice to roll is less than 1. " \
                 "You did some voodoo! Seriously though, this should never " \
                 "happen and you should report a bug.")
 
-        for roll in range(number):
+        for roll in range(count):
             self.__roll.append(randint(1, 6))
 
-        self.__roll.sort()
-        self.__roll.reverse()
+        self.__roll.sort(reverse=True)
 
         return self.__roll
 
