@@ -33,8 +33,15 @@ def join(*faces):
 
 def str(number, dice_dots=chr(183)):
     """Returns the multi-line str relivant to number"""
-    line = " | {0:^5} | "
-    top = bottom = "  -------  "
+    # top_line = chr(9472)
+    # bottom_line = chr(9474)
+    # top_left = chr(9484)
+    # top_right = chr(9488)
+    # bottom_left = chr(9492)
+    # bottom_right = chr(9496)
+    top    = " ┌───────┐ "
+    line   = " │ {0:^5} │ "
+    bottom = " └───────┘ "
 
     s = [top] + [line.format(x) for x in side(number)] + [bottom]
 
