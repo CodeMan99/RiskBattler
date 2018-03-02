@@ -70,7 +70,7 @@ class Army:
         """
         self.__roll = []
 
-        # This sets the correct count for dwindled armies.
+        # sets the correct count for dwindled armies
         if count >= self.__troops:
             count = self.__troops - self.__reserve
 
