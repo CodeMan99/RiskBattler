@@ -178,6 +178,8 @@ def get_int(scr, x, msg):
 
 def main(stdscr):
     curses.curs_set(0)
+    curses.start_color()
+    curses.use_default_colors()
 
     stdscr.addstr(0, 20, "Welcome to the Risk Battler!")
 
